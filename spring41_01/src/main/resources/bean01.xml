@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        容器在构建Student对象之后,会调用init-method指定的方法,当容器关闭的时候,会执行 destroy-method指定的方法
+    -->
+    <bean id="student" class="cn.itcast.life.Student" init-method="init" destroy-method="destroy"/>
+
+</beans>

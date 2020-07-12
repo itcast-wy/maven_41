@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!--
+    1. 当前项目的坐标
+    2. 依赖
+    3. 插件-->
+
+    <!--组织名:公司域名反写-->
+    <groupId>cn.itcast</groupId>
+    <!--模块名: -->
+    <artifactId>maven_41</artifactId>
+    <!--版本号: SNAPSHOT(开发版) RELEASE(发布版)-->
+    <version>1.0-SNAPSHOT</version>
+    <!--打包方式:默认jar 可以改为war(web项目) pom(聚合工程)-->
+    <packaging>war</packaging>
+
+    <!--依赖包
+        初次使用某一个包: 需要自己去maven仓库中搜索坐标并下载
+        如果后续想通过代码提示出依赖,那么就需要更新idea里的maven索引信息
+
+         敲击Alt+Insert键也可以快速添加依赖
+    -->
+    <dependencies>
+
+
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.41</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <!--编译/测试有效,打包不会打进去-->
+            <scope>provided</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.10</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--配置tomcat7的插件, 可以通过tomcat7:run命令来进行启动项目-->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <path>/</path>
+                    <port>8888</port>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

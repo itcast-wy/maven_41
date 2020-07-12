@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--
+        加载db.properties
+        别名
+        配置env
+        mapper扫描
+    -->
+    <properties resource="db.properties"/>
+
+
+    <typeAliases>
+        <!--包扫描,会把类名作为别名,当出现扫描多个包,并且类名有重复的时候,必须有一个手动定义-->
+        <typeAlias type="cn.itcast.pojo1.User" alias="User1"/>
+        <package name="cn.itcast.pojo"/>
+    </typeAliases>
+    <environments default="dev">
+        <environment id="dev">
+            <!--配置JDBC事务管理器-->
+            <transactionManager type="JDBC"></transactionManager>
+            <!--数据库连接池-->
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <!--扫描整个包,必须保证Mapper的java和xml要同名同包-->
+        <package name="cn.itcast.mapper"/>
+    </mappers>
+
+
+</configuration>

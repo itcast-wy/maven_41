@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--这个文件是Spring的核心配置文件
+        我们需要管理的对象,都在这里定义
+    -->
+    <bean id="userService" class="cn.itcast.demo.UserService">
+        <!--
+            通过反射的方式,把张三设置到username中,必须有setter方法
+        -->
+        <property name="username" value="张三"/>
+    </bean>
+
+    <!-- 声明的普通bean -->
+    <bean id="user" class="cn.itcast.demo.User" />
+
+    <!--静态工厂获取对象
+        id: 获取user时使用的名称
+        class: 工厂类的全类名
+        factory-method: 获取对象使用的方法
+    -->
+    <bean id="user02" class="cn.itcast.demo.StaticFactoryBean" factory-method="getUser"/>
+
+
+    <!--
+        实例工厂获取user对象的方式
+        1: 首先把工厂交给spring管理, 容器启动的时候会去调用实例工厂的构造方法
+        2: 定义user的时候,需要引用工厂类对象
+            factory-bean="工厂对象的id"
+            factory-method="工厂中获取对象的方法"
+    -->
+    <bean id="factoryBean" class="cn.itcast.demo.FactoryBean"/>
+
+    <bean id="user03" factory-bean="factoryBean" factory-method="getUser"/>
+
+    <!-- 声明的普通bean,演示spring对象的范围
+        scope:
+            singleton: 单例
+            prototype: 多例
+    -->
+    <bean id="user04" class="cn.itcast.demo.User" scope="singleton"/>
+
+
+</beans>
