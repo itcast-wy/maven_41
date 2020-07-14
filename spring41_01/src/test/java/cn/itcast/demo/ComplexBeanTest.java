@@ -17,14 +17,14 @@ public class ComplexBeanTest {
         ComplexBean complexBean = context.getBean("complexBean", ComplexBean.class);
         String[] arr = complexBean.getArr();
         System.out.println(Arrays.toString(arr));
-        System.out.println("---------------------");
+        System.out.println("---------------------"+complexBean.getClass());
         List<Person> list = complexBean.getList();
         for (Person person : list) {
             System.out.println(person);
         }
 
         System.out.println("---------------------");
-        Set<String> set = complexBean.getSet();
+        Set<Integer> set = complexBean.getSet();
         System.out.println(set);
         System.out.println("---------------------");
 

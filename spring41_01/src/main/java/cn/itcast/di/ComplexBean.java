@@ -11,7 +11,7 @@ import java.util.*;
 public class ComplexBean {
     private String[] arr;
     private List<Person> list;
-    private Set<String> set;
+    private Set<Integer> set;
     private Map<String,Person> map;
     private Properties properties;
 }
