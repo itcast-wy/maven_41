@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--目标类-->
+    <bean id="user" class="cn.itcast.aop_xml.UserImpl"/>
+    <bean id="user2" class="cn.itcast.aop_xml.UserImpl2"/>
+    <!--增强类-->
+    <bean id="advice" class="cn.itcast.aop_xml.Advice"/>
+
+    <!--配置AOP-->
+    <aop:config>
+        <!--切入点 就是在目标类中实际增强的方法-->
+        <aop:pointcut id="pointcut" expression="execution(* *.work(..))"/>
+        <!--配置切面 所有的切入点和代理对象的方法组成在一起 构成了切面 -->
+        <aop:aspect ref="advice">
+            <aop:before method="before" pointcut-ref="pointcut"/>
+            <aop:after method="after" pointcut-ref="pointcut"/>
+        </aop:aspect>
+    </aop:config>
+</beans>
