@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--目标类-->
+    <bean id="user" class="cn.itcast.aop_xml.UserImpl"/>
+    <!--增强类-->
+    <bean id="advice" class="cn.itcast.aop_xml.Advice"/>
+
+    <!--配置AOP-->
+    <aop:config>
+        <!--让增加方法变为切点-->
+        <aop:pointcut id="add" expression="execution(* cn.itcast..add*(..))"/>
+        <!--让删除方法变为切点-->
+        <aop:pointcut id="delete" expression="execution(* cn.itcast..delete*(..))"/>
+        <!--让修改方法变为切点-->
+        <aop:pointcut id="update" expression="execution(* cn.itcast..update*(..))"/>
+        <!--让查询方法变为切点-->
+        <aop:pointcut id="query" expression="execution(* cn.itcast..query*(..))"/>
+        <!--让批量删除法变为切点-->
+        <aop:pointcut id="batch" expression="execution(* cn.itcast..batch*(..))"/>
+
+
+        <!--配置切面 所有的切入点和代理对象的方法组成在一起 构成了切面 -->
+        <aop:aspect ref="advice">
+            <aop:before method="before" pointcut-ref="add"/>
+            <aop:after-returning method="afterReturning" pointcut-ref="delete"/>
+            <aop:after-throwing method="throwable" pointcut-ref="update"/>
+            <!-- around: 环绕通知,类似 before + after-returning, 方法之前运行,方法之后运行 -->
+            <aop:around method="around" pointcut-ref="query"/>
+
+            <!--after-returning: 代表是正常返回
+                after :类似finally,出不出异常最终都会执行
+            -->
+            <aop:after-returning method="afterReturning" pointcut-ref="batch"/>
+            <aop:after method="after" pointcut-ref="batch"/>
+
+        </aop:aspect>
+    </aop:config>
+</beans>

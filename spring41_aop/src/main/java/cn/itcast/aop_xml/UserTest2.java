@@ -7,14 +7,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:bean.xml")
-public class UserTest {
+@ContextConfiguration("classpath:bean2.xml")
+public class UserTest2 {
 
     @Autowired
     User user;
-
-    @Autowired
-    UserImpl2 userImpl2;
 
     @Autowired
     Advice advice;
@@ -22,12 +19,17 @@ public class UserTest {
 
     @Test
     public void testUser(){
-        user.work();
-        userImpl2.work();
-        // class com.sun.proxy.$Proxy13 user明显是动态生成的
-        System.out.println(user.getClass());
-        System.out.println(userImpl2.getClass());
-        System.out.println(advice.getClass());
+        // 前置通知
+//        user.addUser();
+//        // 后置通知
+//        user.deleteUser();
+//        // 异常通知
+//        user.updateUser();
+        // 环绕通知
+        user.queryUser();
+        // 最终通知
+//        user.batchDeleteUser();
+
     }
 
 

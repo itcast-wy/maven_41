@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    mapper代理开发:
+        namespace: 当前文件的同名类的全限定名
+
+-->
+<mapper namespace="cn.itcast.mapper.UserMapper">
+
+    <!-- 根据id查询用户信息
+        id: statement的唯一标识,`namespace+id` 在项目中不能重名
+        parameterType: 入参的类型
+        resultType: 返回值类型
+    -->
+    <select id="findUserById" parameterType="int" resultType="user">
+        select * from user where id=#{id}
+    </select>
+
+    <!--根据name模糊查询用户信息
+        # : 代表占位符
+        $ : 代表字符串拼接
+    -->
+    <select id="findUsersByName" parameterType="string" resultType="user">
+        select * from user where username like '%${value}%'
+    </select>
+
+    <!--添加用户信息
+    -->
+    <insert id="addUser" parameterType="user">
+        INSERT into user values(null,#{username},#{birthday},#{sex},#{address})
+    </insert>
+
+</mapper>
